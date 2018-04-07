@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand logo" href="/">Fantasy Foosball</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Teams <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Players</a>
+      </li>
+    </ul>
+    <%if user_signed_in? %>
+
+    <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle black-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Profile
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <i class='fa fa-sign-out' aria-hidden='true'></i><%= link_to "Logout", destroy_user_session_path, :method => :delete, class: "no-decoration dropdown-item black-color" %>
+        </div>
+          </div>
+  
+      <%else%>
+          <%= link_to "Sign In", new_user_session_path, class: "no-decoration padding-right-40 black-color" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "no-decoration black-color" %>
+      <%end%>  
+  </div>
+</nav>
