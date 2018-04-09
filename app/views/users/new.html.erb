@@ -1,0 +1,16 @@
+<div class="row margin-top-50">
+    <div class="col-lg-4 col-md-4"></div>
+    <div class="col-lg-4 col-md-4 ">
+
+		<%= form_for User.new, url: new_user_path do |f| %>
+		  # The form content
+		<% end %>
+
+		<h1>Create New User</h1>
+
+		<%= render 'form' %>
+
+		<br>
+		<%= link_to 'Back', users_path %> 
+	</div>
+</div>		

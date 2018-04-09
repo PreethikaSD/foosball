@@ -17,7 +17,7 @@
 
     <div class="nav-item dropdown">
         <a class="nav-link dropdown-toggle black-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Profile
+          <%=current_user.first_name%> <%=current_user.last_name%>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <i class='fa fa-sign-out' aria-hidden='true'></i><%= link_to "Logout", destroy_user_session_path, :method => :delete, class: "no-decoration dropdown-item black-color" %>
@@ -26,7 +26,6 @@
   
       <%else%>
           <%= link_to "Sign In", new_user_session_path, class: "no-decoration padding-right-40 black-color" %>
-          <%= link_to "Sign Up", new_user_registration_path, class: "no-decoration black-color" %>
       <%end%>  
   </div>
 </nav>
