@@ -1,0 +1,32 @@
+<%= form_with(model: match, local: true) do |form| %>
+  <% if match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(match.errors.count, "error") %> prohibited this match from being saved:</h2>
+
+      <ul>
+      <% match.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :code %>
+    <%= form.text_field :code, id: :match_code, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :match_date %>
+    <%= form.date_select :match_date, id: :match_match_date, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :winner %>
+    <%= form.text_field :winner, id: :match_winner, class: "form-control" %>
+  </div>
+
+  <div class="actions form-group">
+    <%= form.submit %>
+  </div>
+<% end %>
