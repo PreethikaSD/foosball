@@ -1,0 +1,28 @@
+<div class="mx-auto" style="width: 40%">
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @game.score %>
+</p>
+
+<p>
+  <strong>Round no:</strong>
+  <%= @game.round_no %>
+</p>
+
+<p>
+  <strong>Match:</strong>
+  <%= @game.match.code %>
+</p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @game.team.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
+</div>

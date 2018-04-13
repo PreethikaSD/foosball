@@ -1,0 +1,34 @@
+<div class="form-group">
+<%= form_with(model: team, local: true) do |form| %>
+  <% if team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% team.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :matches_played %>
+    <%= form.text_field :matches_played, class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :matches_won %>
+    <%= form.text_field :matches_won, class: "form-control" %>
+  </div>
+
+  <div class="actions form-group">
+    <%= form.submit %>
+  </div>
+<% end %>
+</div>
