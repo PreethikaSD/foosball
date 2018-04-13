@@ -1,5 +1,6 @@
 class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_signed_in, only: [:create, :destroy, :new, :edit]
 
   # GET /matches
   # GET /matches.json
@@ -28,7 +29,7 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       if @match.save
-        format.html { redirect_to @match, notice: 'Match was successfully created.' }
+        format.html { redirect_to '/matches', notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: @match }
       else
         format.html { render :new }
@@ -69,6 +70,13 @@ class MatchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
-      params.require(:match).permit(:code, :match_date, :winner)
+      params.require(:match).permit(:code, :team1, :team2, :winner)
     end
+
+    def check_if_signed_in
+      unless signed_in?
+          redirect_back fallback_location: root_path, alert: "Please login to access this page"
+      end
+    end
+
 end

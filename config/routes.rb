@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :teams
   resources :matches
+  resources :match_details
+  resources :games
+  resources :teams
   resources :players
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "users#index"
@@ -8,4 +10,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  get '/calculate_scores', to: 'games#calculate_scores'
+  # get '/find_winner', to: 'match_details#index'
+  get '/team_ranking', to: 'teams#team_ranking'
+  get '/populate_other_list', to: 'games#populate_other_list'
 end

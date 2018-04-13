@@ -4,7 +4,9 @@ RSpec.describe "matches/new", type: :view do
   before(:each) do
     assign(:match, Match.new(
       :code => "MyString",
-      :winner => "MyString"
+      :team1 => 1,
+      :team2 => 1,
+      :winner => 1
     ))
   end
 
@@ -14,6 +16,10 @@ RSpec.describe "matches/new", type: :view do
     assert_select "form[action=?][method=?]", matches_path, "post" do
 
       assert_select "input[name=?]", "match[code]"
+
+      assert_select "input[name=?]", "match[team1]"
+
+      assert_select "input[name=?]", "match[team2]"
 
       assert_select "input[name=?]", "match[winner]"
     end

@@ -11,22 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field form-group">
-    <%= form.label :code %>
-    <%= form.text_field :code, id: :match_code, class: "form-control" %>
+
+  <div class="field">
+    <%= form.label :team1 %>
+    <%= form.collection_select :team1, Team.order(:name),:id,:name, class: "form-control" %>
+
   </div>
 
-  <div class="field form-group">
-    <%= form.label :match_date %>
-    <%= form.date_select :match_date, id: :match_match_date, class: "form-control" %>
+  <div class="field">
+    <%= form.label :team2 %>
+    <%= form.collection_select :team2, Team.order(:name),:id,:name, class: "form-control" %>
+
   </div>
 
-  <div class="field form-group">
+  <div class="field">
     <%= form.label :winner %>
-    <%= form.text_field :winner, id: :match_winner, class: "form-control" %>
+    <%= form.number_field :winner, id: :match_winner %>
   </div>
 
-  <div class="actions form-group">
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>

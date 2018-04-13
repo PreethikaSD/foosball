@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_signed_in, only: [:create, :destroy, :new, :edit]
 
   # GET /players
   # GET /players.json
@@ -24,7 +25,6 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-    byebug
     @player = Player.new(player_params)
 
     respond_to do |format|
@@ -70,6 +70,13 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:team_id, :name, :age, :sex)
+      params.require(:player).permit(:team_id, :name)
     end
+    
+    def check_if_signed_in
+      unless signed_in?
+          redirect_back fallback_location: root_path, alert: "Please login to access this page"
+      end
+    end
+
 end

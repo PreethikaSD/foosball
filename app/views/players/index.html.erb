@@ -9,8 +9,6 @@
     <tr>
       <th>Player Name</th>
       <th>Team Name</th>
-      <th>Age</th>
-      <th>Sex</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,8 +18,6 @@
       <tr>
         <td><%= player.name %></td>
         <td><%= player.team.name %></td>
-        <td><%= player.age %></td>
-        <td><%= player.sex %></td>        
         <td><%= link_to 'Show', player %></td>
         <td><%= link_to 'Edit', edit_player_path(player) %></td>
         <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>

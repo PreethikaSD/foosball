@@ -12,12 +12,6 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :match_id %>
-    <%= form.collection_select :match_id, Match.order(:code),:id,:code, class: "form-control" %>
-
-  </div>
-
   <div class="field form-group">
     <%= form.label :name %>
     <%= form.text_field :name, class: "form-control" %>

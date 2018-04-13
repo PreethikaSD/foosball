@@ -2,10 +2,22 @@
 
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <strong>Match:</strong>
-  <%= @team.match %>
+  <%= @team.name %>
 </p>
+
+<p>
+  <strong>Match:</strong>
+  <%= @team.matches_played %>
+</p>
+
+<p>
+  <strong>Match:</strong>
+  <%= @team.matches_won %>
+</p>
+
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>
