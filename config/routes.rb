@@ -12,6 +12,5 @@ Rails.application.routes.draw do
 
   get '/calculate_scores', to: 'games#calculate_scores'
   # get '/find_winner', to: 'match_details#index'
-  get '/team_ranking', to: 'teams#team_ranking'
   get '/populate_other_list', to: 'games#populate_other_list'
 end
