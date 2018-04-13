@@ -12,7 +12,6 @@ class Game < ApplicationRecord
   validate :round2_after_round1
   validate :team_belongs_to_match
   validate :round3_needed
-  validate :equal_score
 
   def team_belongs_to_match
     selected_match = Match.find(self.match.id)
@@ -60,16 +59,6 @@ class Game < ApplicationRecord
       else
         errors.add(:team_id, "Please fill up the scores for Round 1 and Round 2")
       end  
-    end
-  end
-
-
-  def equal_score
-    game = Game.where(match_id: self.match_id, round_no: 3)
-    if game.exists? and game.count == 2
-      if game[0].score == game[1].score
-        errors.add(:team_id, "Scores cannot be the same")
-      end
     end
   end
 
