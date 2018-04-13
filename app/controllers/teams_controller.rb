@@ -1,6 +1,8 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   before_action :check_if_signed_in, only: [:create, :destroy, :new, :edit]
+  before_action :calculate_winning_percentage, only: [:index]
+  before_action :calculate_rank, only: [:index]
 
   # GET /teams
   # GET /teams.json
@@ -37,7 +39,7 @@ class TeamsController < ApplicationController
         end
       end
     end
-    @teams = Team.all
+    @teams = Team.all.order(:rank)
   end
 
   # GET /teams/1
@@ -95,20 +97,49 @@ class TeamsController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = Team.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_team
+    @team = Team.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def team_params
-      params.require(:team).permit(:name, :matches_won, :matches_played)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def team_params
+    params.require(:team).permit(:name, :matches_won, :matches_played)
+  end
 
-    def check_if_signed_in
-      unless signed_in?
-          redirect_back fallback_location: root_path, alert: "Please login to access this page"
+  def check_if_signed_in
+    unless signed_in?
+        redirect_back fallback_location: root_path, alert: "Please login to access this page"
+    end
+  end
+
+  def calculate_winning_percentage
+    Team.all.each do |team|
+      if team.matches_played > 0 and team.matches_won > 0
+        team.winning_percentage =  ((team.matches_won.to_f/team.matches_played.to_f)*100).round(2)
+        team.save
+      else
+        team.winning_percentage = 0
+        team.rank =  nil  
+        team.save
       end
     end
+  end
 
+  def calculate_rank
+    winning_percentage = Team.order(winning_percentage: :desc).pluck(:winning_percentage)
+    rank = 1
+    winning_percentage.each_with_index.map do |value,i|
+      calculated_rank = winning_percentage[i-1] == value ? rank : rank = i+1
+      t = Team.where(winning_percentage: value)
+      t.each do |team|
+        if team.winning_percentage == 0
+          team.rank = nil 
+        else  
+          team.rank = calculated_rank
+        end
+        team.save
+      end
+    end  
+  end
 end

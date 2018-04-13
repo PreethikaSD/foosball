@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411104720) do
+ActiveRecord::Schema.define(version: 20180413104714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20180411104720) do
     t.integer "matches_won", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "winning_percentage", default: 0.0
+    t.integer "rank"
   end
 
   create_table "users", force: :cascade do |t|
